@@ -122,6 +122,67 @@
             margin-top: 30px;
             font-style: italic;
         }
+
+        /* Styles pour les onglets */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e5e7eb;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-bottom: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+        }
+
+        .tab.active {
+            background: white;
+            color: #1e40af;
+            border-color: #1e40af;
+            border-bottom: 2px solid white;
+            margin-bottom: -2px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-radius: 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+            
+            .tab.active {
+                border-bottom: 1px solid #1e40af;
+                margin-bottom: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -130,103 +191,156 @@
         <div class="subtitle">Précision de l'effort de recherche d'emploi</div>
         <div class="subtitle">Guide à destination des conseiller(e)s</div>
 
-        <h2>Contexte</h2>
-        <p>Votre agence participe à une expérimentation au cœur de l'évolution de l'accompagnement des demandeurs d'emploi.</p>
-        <p>Dans le cadre de l'introduction du contrat d'engagement, certaines agences France Travail ont été sélectionnées pour tester différentes modalités de mise en œuvre de ce contrat et mieux comprendre l'impact du plan d'action sur les démarches de recherche d'emploi des publics accompagnés. Votre agence fait partie de celles qui ont été retenues pour cette expérimentation.</p>
+    <div class="container">
+        <h1>Expérimentation Contrat d'Engagement</h1>
+        <div class="subtitle">Précision de l'effort de recherche d'emploi</div>
+        <div class="subtitle">Guide à destination des conseiller(e)s</div>
 
-        <h2>Objectif de l'expérimentation</h2>
-        <p>L'objectif de cette expérimentation est de mesurer l'effet de l'inscription, dans le plan d'action, d'un niveau d'effort attendu de recherche d'emploi sur l'intensité et la nature des démarches de recherche, ainsi que sur le retour à l'emploi des publics accompagnés par France Travail.</p>
-        <p>Cette recommandation d'effort de recherche d'emploi se traduit par un nombre de candidatures à réaliser sur une période donnée, que vous fixez avec chaque demandeur d'emploi en fonction de sa situation. (Voir rubrique Consignes pour plus de détails).</p>
-
-        <h3>Pourquoi vouloir définir un objectif chiffré de candidatures ?</h3>
-        <ul>
-            <li><strong>Pour clarifier les attentes et encourager l'engagement du demandeur d'emploi :</strong> un objectif concret est plus mobilisateur qu'une consigne vague comme « envoyer des candidatures », notamment pour les demandeurs d'emploi moins autonomes ou qui sous-estiment ou surestiment leurs chances de retour à l'emploi et les efforts associés.</li>
-            <li><strong>Pour donner un repère au demandeur d'emploi :</strong> cela l'aide à mieux jauger l'effort attendu selon son profil, le secteur visé ou la conjoncture locale.</li>
-        </ul>
-
-        <h2>Cadre et périmètre de l'expérimentation</h2>
-        <div class="highlight-box">
-            <p><strong>Vous fixerez un objectif de candidatures avec tous les demandeurs d'emploi que vous accompagnez qui ont un contrat d'engagement ouvert et un métier recherché défini.</strong></p>
+        <!-- Navigation par onglets -->
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('contexte')">Contexte & Objectifs</div>
+            <div class="tab" onclick="showTab('faq1')">FAQ Générale</div>
+            <div class="tab" onclick="showTab('consignes')">Consignes</div>
+            <div class="tab" onclick="showTab('faq2')">FAQ Pratique</div>
         </div>
 
-        <h2>FAQ</h2>
-        <div class="faq-section">
-            <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle à tous les portefeuilles d'accompagnement peu importe leur intensité (Suivi, Guidé, Renforcé, Global...) ?</div>
-            <div class="faq-answer"><strong>OUI.</strong> Tous les demandeurs d'emploi, quelle que soit leur modalité d'accompagnement, sont concernés par cette expérimentation, s'ils ont un contrat d'engagement ouvert et un métier recherché défini. L'autonomie du demandeur d'emploi peut, en revanche, être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
-            <p>Il est entendu que les conseillers en portefeuille Suivi ou Guidé ne seront pas en capacité de vérifier régulièrement la tenue de cet objectif. Ce n'est pas grave. C'est le fait de fixer un objectif chiffré de candidatures qui compte dans cette expérimentation, même s'il ne peut pas toujours être contrôlé.</p>
-        </div>
+        <!-- Contenu des onglets -->
+        <div id="contexte" class="tab-content active">
+            <h2>Contexte</h2>
+            <p>Votre agence participe à une expérimentation au cœur de l'évolution de l'accompagnement des demandeurs d'emploi.</p>
+            <p>Dans le cadre de l'introduction du contrat d'engagement, certaines agences France Travail ont été sélectionnées pour tester différentes modalités de mise en œuvre de ce contrat et mieux comprendre l'impact du plan d'action sur les démarches de recherche d'emploi des publics accompagnés. Votre agence fait partie de celles qui ont été retenues pour cette expérimentation.</p>
 
-        <div class="faq-section">
-            <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux bénéficiaires du RSA accompagnés par France Travail ?</div>
-            <div class="faq-answer"><strong>OUI.</strong> Les bénéficiaires du RSA, s'ils sont suivis par un(e) conseiller(e) France Travail sont également concernés par cette expérimentation, s'ils ont un contrat d'engagement ouvert un métier recherché défini. Le fait d'être au RSA peut, en revanche, être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
-        </div>
+            <h2>Objectif de l'expérimentation</h2>
+            <p>L'objectif de cette expérimentation est de mesurer l'effet de l'inscription, dans le plan d'action, d'un niveau d'effort attendu de recherche d'emploi sur l'intensité et la nature des démarches de recherche, ainsi que sur le retour à l'emploi des publics accompagnés par France Travail.</p>
+            <p>Cette recommandation d'effort de recherche d'emploi se traduit par un nombre de candidatures à réaliser sur une période donnée, que vous fixez avec chaque demandeur d'emploi en fonction de sa situation. (Voir rubrique Consignes pour plus de détails).</p>
 
-        <div class="faq-section">
-            <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux demandeurs d'emploi en situation de handicap, suivis par un(e) conseiller(e) Cap 'Emploi ?</div>
-            <div class="faq-answer"><strong>NON.</strong> Vous devez fixer un objectif de candidatures pour les demandeurs d'emploi en situation de handicap seulement s'ils sont suivis par France Travail, ont un contrat d'engagement ouvert et un métier recherché défini. Dans ce cas, la présence d'un handicap et sa sévérité peuvent être des éléments déterminants dans le choix du nombre de candidatures à envoyer.</div>
-        </div>
-
-        <div class="faq-section">
-            <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux demandeurs d'emploi suivis par les missions locales ?</div>
-            <div class="faq-answer"><strong>NON.</strong> Elle ne s'applique qu'aux demandeurs d'emploi inscrits et accompagnés par France Travail et donc pas aux jeunes suivis par les missions locales. Toutefois, l'âge d'un demandeur d'emploi peut être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
-        </div>
-
-        <div class="faq-section">
-            <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle uniquement aux demandeurs d'emploi pour lesquels une Offre Raisonnable d'Emploi est définie ?</div>
-            <div class="faq-answer"><strong>NON.</strong> Un objectif de candidatures doit être fixé dès lors qu'un contrat d'engagement est ouvert et qu'un métier recherché est défini et pas uniquement lorsqu'il y a une ORE.</div>
-        </div>
-
-        <div class="faq-section">
-            <div class="faq-question">Dois-je attendre que le demandeur d'emploi que j'accompagne ait suffisamment travaillé ses techniques de recherche d'emploi avant de commencer à fixer un nombre de candidatures ?</div>
-            <div class="faq-answer"><strong>NON.</strong> Une cible d'effort de recherche d'emploi doit être définie dès le début de l'accompagnement. En revanche, cet objectif reste souple et adaptable dans le temps ; il peut être faible les premiers mois pendant l'apprentissage des méthodes de recherche d'emploi.</div>
-        </div>
-
-        <div class="faq-section">
-            <div class="faq-question">Une bannière "veillez à fixer un objectif de candidatures" s'affiche pour un demandeur d'emploi qui n'a pourtant pas de contrat d'engagement. Dois-je quand même fixer un objectif ?</div>
-            <div class="faq-answer"><strong>NON.</strong> La fixation systématique d'une cible de candidatures vaut seulement pour les demandeurs d'emploi qui ont un contrat d'engagement ouvert. La bannière apparaît qu'un contrat soit signé ou non. Cette implémentation uniforme a été retenue pour faciliter le développement informatique des bannières. Si vous avez fixé un objectif de candidature pour un demandeur d'emploi sans contrat d'engagement, ce n'est pas grave, cela ne sera simplement pas observé dans le cadre de cette expérimentation.</div>
-        </div>
-
-        <h2>Consignes</h2>
-        <div class="info-box">
-            <h3>Tous types de candidatures sont comptabilisés dans cet objectif :</h3>
+            <h3>Pourquoi vouloir définir un objectif chiffré de candidatures ?</h3>
             <ul>
-                <li>Mises En Contact,</li>
-                <li>Mises En Relation,</li>
-                <li>Réponses à des offres existantes ou candidatures spontanées,</li>
-                <li>Offres identifiées en autonomie par le demandeur d'emploi ou propositions d'offres d'origine conseiller</li>
+                <li><strong>Pour clarifier les attentes et encourager l'engagement du demandeur d'emploi :</strong> un objectif concret est plus mobilisateur qu'une consigne vague comme « envoyer des candidatures », notamment pour les demandeurs d'emploi moins autonomes ou qui sous-estiment ou surestiment leurs chances de retour à l'emploi et les efforts associés.</li>
+                <li><strong>Pour donner un repère au demandeur d'emploi :</strong> cela l'aide à mieux jauger l'effort attendu selon son profil, le secteur visé ou la conjoncture locale.</li>
             </ul>
+
+            <h2>Cadre et périmètre de l'expérimentation</h2>
+            <div class="highlight-box">
+                <p><strong>Vous fixerez un objectif de candidatures avec tous les demandeurs d'emploi que vous accompagnez qui ont un contrat d'engagement ouvert et un métier recherché défini.</strong></p>
+            </div>
         </div>
 
-        <p>Pour fixer l'objectif de candidatures à envoyer dans le plan d'action d'un demandeur d'emploi, rendez-vous dans l'outil Organisation des Démarches et, au choix :</p>
-        <ul>
-            <li><strong>Ajoutez une seule action Réponse à candidature</strong> et indiquez une fréquence (x fois, tous les y jours) dans la description de l'action → Adapté aux demandeurs d'emploi capables d'identifier des offres et de faire des candidatures en autonomie</li>
-            <li><strong>Ajoutez une action distincte pour chaque candidature, MEC ou MER</strong> → Adapté aux candidatures et offres pour des postes ou entreprises précises, identifiées avec le demandeur d'emploi.</li>
-        </ul>
+        <div id="faq1" class="tab-content">
+            <h2>FAQ Générale</h2>
+            <div class="faq-section">
+                <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle à tous les portefeuilles d'accompagnement peu importe leur intensité (Suivi, Guidé, Renforcé, Global...) ?</div>
+                <div class="faq-answer"><strong>OUI.</strong> Tous les demandeurs d'emploi, quelle que soit leur modalité d'accompagnement, sont concernés par cette expérimentation, s'ils ont un contrat d'engagement ouvert et un métier recherché défini. L'autonomie du demandeur d'emploi peut, en revanche, être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
+                <p>Il est entendu que les conseillers en portefeuille Suivi ou Guidé ne seront pas en capacité de vérifier régulièrement la tenue de cet objectif. Ce n'est pas grave. C'est le fait de fixer un objectif chiffré de candidatures qui compte dans cette expérimentation, même s'il ne peut pas toujours être contrôlé.</p>
+            </div>
 
-        <p>Ces ajouts alimenteront directement le plan d'action du demandeur d'emploi si celui-ci a un contrat d'engagement ouvert.</p>
+            <div class="faq-section">
+                <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux bénéficiaires du RSA accompagnés par France Travail ?</div>
+                <div class="faq-answer"><strong>OUI.</strong> Les bénéficiaires du RSA, s'ils sont suivis par un(e) conseiller(e) France Travail sont également concernés par cette expérimentation, s'ils ont un contrat d'engagement ouvert un métier recherché défini. Le fait d'être au RSA peut, en revanche, être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
+            </div>
 
-        <p>Cette démarche s'inscrit pleinement dans votre rôle d'accompagnement personnalisé, en vous laissant en toute liberté pour adapter l'objectif de candidatures aux profils et situations des personnes que vous suivez, selon les critères que vous jugez pertinents.</p>
+            <div class="faq-section">
+                <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux demandeurs d'emploi en situation de handicap, suivis par un(e) conseiller(e) Cap 'Emploi ?</div>
+                <div class="faq-answer"><strong>NON.</strong> Vous devez fixer un objectif de candidatures pour les demandeurs d'emploi en situation de handicap seulement s'ils sont suivis par France Travail, ont un contrat d'engagement ouvert et un métier recherché défini. Dans ce cas, la présence d'un handicap et sa sévérité peuvent être des éléments déterminants dans le choix du nombre de candidatures à envoyer.</div>
+            </div>
 
-        <p><strong>Exemple de critères pouvant être mobilisés :</strong> âge du demandeur, modalité de suivi et d'accompagnement, freins périphériques à l'emploi, métier visé, tension du marché du travail local, ...</p>
+            <div class="faq-section">
+                <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle aux demandeurs d'emploi suivis par les missions locales ?</div>
+                <div class="faq-answer"><strong>NON.</strong> Elle ne s'applique qu'aux demandeurs d'emploi inscrits et accompagnés par France Travail et donc pas aux jeunes suivis par les missions locales. Toutefois, l'âge d'un demandeur d'emploi peut être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
+            </div>
 
-        <div class="conseil-box">
-            <p><strong>Conseil :</strong> Fixez une fréquence mensuelle pour les demandeurs d'emploi en parcours intensif (Renforcé, Global, EXH ...) et une fréquence hebdomadaire pour les demandeurs d'emploi plus autonomes (Suivi, Guidé)</p>
+            <div class="faq-section">
+                <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle uniquement aux demandeurs d'emploi pour lesquels une Offre Raisonnable d'Emploi est définie ?</div>
+                <div class="faq-answer"><strong>NON.</strong> Un objectif de candidatures doit être fixé dès lors qu'un contrat d'engagement est ouvert et qu'un métier recherché est défini et pas uniquement lorsqu'il y a une ORE.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">Dois-je attendre que le demandeur d'emploi que j'accompagne ait suffisamment travaillé ses techniques de recherche d'emploi avant de commencer à fixer un nombre de candidatures ?</div>
+                <div class="faq-answer"><strong>NON.</strong> Une cible d'effort de recherche d'emploi doit être définie dès le début de l'accompagnement. En revanche, cet objectif reste souple et adaptable dans le temps ; il peut être faible les premiers mois pendant l'apprentissage des méthodes de recherche d'emploi.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">Une bannière "veillez à fixer un objectif de candidatures" s'affiche pour un demandeur d'emploi qui n'a pourtant pas de contrat d'engagement. Dois-je quand même fixer un objectif ?</div>
+                <div class="faq-answer"><strong>NON.</strong> La fixation systématique d'une cible de candidatures vaut seulement pour les demandeurs d'emploi qui ont un contrat d'engagement ouvert. La bannière apparaît qu'un contrat soit signé ou non. Cette implémentation uniforme a été retenue pour faciliter le développement informatique des bannières. Si vous avez fixé un objectif de candidature pour un demandeur d'emploi sans contrat d'engagement, ce n'est pas grave, cela ne sera simplement pas observé dans le cadre de cette expérimentation.</div>
+            </div>
         </div>
 
-        <h2>FAQ</h2>
-        <div class="faq-section">
-            <div class="faq-question">Je ne connais pas assez bien la situation du marché du travail dans le métier recherché par le demandeur d'emploi, et je ne sais pas quelle cible fixer. Que faire ?</div>
-            <div class="faq-answer">N'hésitez pas à consulter l'outil IMT et solliciter l'avis de vos collègues conseillers entreprise. Ces derniers pourront vous donner une idée, par exemple, du nombre d'offres d'emploi publiées pour un métier donné au cours des 30 derniers jours.</div>
+        <div id="consignes" class="tab-content">
+            <h2>Consignes</h2>
+            <div class="info-box">
+                <h3>Tous types de candidatures sont comptabilisés dans cet objectif :</h3>
+                <ul>
+                    <li>Mises En Contact,</li>
+                    <li>Mises En Relation,</li>
+                    <li>Réponses à des offres existantes ou candidatures spontanées,</li>
+                    <li>Offres identifiées en autonomie par le demandeur d'emploi ou propositions d'offres d'origine conseiller</li>
+                </ul>
+            </div>
+
+            <p>Pour fixer l'objectif de candidatures à envoyer dans le plan d'action d'un demandeur d'emploi, rendez-vous dans l'outil Organisation des Démarches et, au choix :</p>
+            <ul>
+                <li><strong>Ajoutez une seule action Réponse à candidature</strong> et indiquez une fréquence (x fois, tous les y jours) dans la description de l'action → Adapté aux demandeurs d'emploi capables d'identifier des offres et de faire des candidatures en autonomie</li>
+                <li><strong>Ajoutez une action distincte pour chaque candidature, MEC ou MER</strong> → Adapté aux candidatures et offres pour des postes ou entreprises précises, identifiées avec le demandeur d'emploi.</li>
+            </ul>
+
+            <p>Ces ajouts alimenteront directement le plan d'action du demandeur d'emploi si celui-ci a un contrat d'engagement ouvert.</p>
+
+            <p>Cette démarche s'inscrit pleinement dans votre rôle d'accompagnement personnalisé, en vous laissant en toute liberté pour adapter l'objectif de candidatures aux profils et situations des personnes que vous suivez, selon les critères que vous jugez pertinents.</p>
+
+            <p><strong>Exemple de critères pouvant être mobilisés :</strong> âge du demandeur, modalité de suivi et d'accompagnement, freins périphériques à l'emploi, métier visé, tension du marché du travail local, ...</p>
+
+            <div class="conseil-box">
+                <p><strong>Conseil :</strong> Fixez une fréquence mensuelle pour les demandeurs d'emploi en parcours intensif (Renforcé, Global, EXH ...) et une fréquence hebdomadaire pour les demandeurs d'emploi plus autonomes (Suivi, Guidé)</p>
+            </div>
         </div>
 
-        <div class="faq-section">
-            <div class="faq-question">La situation du demandeur d'emploi a évolué et l'effort de recherche d'emploi défini antérieurement n'est plus pertinent. Que faire ?</div>
-            <div class="faq-answer">La cible de candidatures peut être ajustée d'un entretien à l'autre en fonction de l'évolution de la situation du DE et du marché du travail. Elle peut être renégociée avec le DE à tout moment pour rester à la fois réaliste et motivante, sans le mettre en difficulté. Si cette fréquence change, vous devez nécessairement inscrire la nouvelle cible dans le plan d'action du demandeur d'emploi comme décrit précédemment.</div>
+        <div id="faq2" class="tab-content">
+            <h2>FAQ Pratique</h2>
+            <div class="faq-section">
+                <div class="faq-question">Je ne connais pas assez bien la situation du marché du travail dans le métier recherché par le demandeur d'emploi, et je ne sais pas quelle cible fixer. Que faire ?</div>
+                <div class="faq-answer">N'hésitez pas à consulter l'outil IMT et solliciter l'avis de vos collègues conseillers entreprise. Ces derniers pourront vous donner une idée, par exemple, du nombre d'offres d'emploi publiées pour un métier donné au cours des 30 derniers jours.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">La situation du demandeur d'emploi a évolué et l'effort de recherche d'emploi défini antérieurement n'est plus pertinent. Que faire ?</div>
+                <div class="faq-answer">La cible de candidatures peut être ajustée d'un entretien à l'autre en fonction de l'évolution de la situation du DE et du marché du travail. Elle peut être renégociée avec le DE à tout moment pour rester à la fois réaliste et motivante, sans le mettre en difficulté. Si cette fréquence change, vous devez nécessairement inscrire la nouvelle cible dans le plan d'action du demandeur d'emploi comme décrit précédemment.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">Si le demandeur d'emploi ne respecte pas la fréquence de candidatures fixée, peut-il être sanctionné ?</div>
+                <div class="faq-answer"><strong>OUI.</strong> Comme toutes les autres actions inscrites dans le plan d'action, la fréquence de candidatures peut faire l'objet d'un contrôle, et potentiellement entraîner une sanction si elle n'est pas respectée. Toutefois, le fait de définir un effort de recherche attendu n'augmente pas systématiquement le risque de sanction. Pour certains DE, cela pourrait au contraire réduire ce risque, en les incitant à structurer leur recherche d'emploi et à produire autant de preuves d'un effort positif de recherche qui les protègent en cas de contrôle de la recherche d'emploi.</div>
+            </div>
         </div>
 
-        <div class="faq-section">
-            <div class="faq-question">Si le demandeur d'emploi ne respecte pas la fréquence de candidatures fixée, peut-il être sanctionné ?</div>
-            <div class="faq-answer"><strong>OUI.</strong> Comme toutes les autres actions inscrites dans le plan d'action, la fréquence de candidatures peut faire l'objet d'un contrôle, et potentiellement entraîner une sanction si elle n'est pas respectée. Toutefois, le fait de définir un effort de recherche attendu n'augmente pas systématiquement le risque de sanction. Pour certains DE, cela pourrait au contraire réduire ce risque, en les incitant à structurer leur recherche d'emploi et à produire autant de preuves d'un effort positif de recherche qui les protègent en cas de contrôle de la recherche d'emploi.</div>
+        <!-- Informations de contact - toujours visibles -->
+        <div class="contact-info">
+            <h2>Informations de Contact</h2>
+            <p>Si vous avez d'autres questions au sujet de l'expérimentation ou des consignes transmises, vous pouvez écrire à <strong>experimentation_ced@ipp.eu</strong>.</p>
+            <p>L'équipe de recherche en charge de l'expérimentation vous répondra, et mettra à jour la liste des questions fréquentes.</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Masquer tous les contenus d'onglets
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Désactiver tous les onglets
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Afficher le contenu de l'onglet sélectionné
+            document.getElementById(tabName).classList.add('active');
+
+            // Activer l'onglet sélectionné
+            event.target.classList.add('active');
+        }
+    </script> cas de contrôle de la recherche d'emploi.</div>
         </div>
 
         <div class="contact-info">
