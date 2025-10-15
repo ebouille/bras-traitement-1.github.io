@@ -22,14 +22,14 @@
         // Créer et insérer le script GA
         var script = document.createElement('script');
         script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-99VCJ2VKGK';
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-BL9389ED4J';
         document.head.appendChild(script);
         
         // Configuration GA
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-99VCJ2VKGK');
+        gtag('config', 'G-BL9389ED4J');
       }
     </script>
     
@@ -335,179 +335,113 @@
         </div>
     </div>
 
-    <script>
-        // Enhanced tracking system
-        const trackingData = {
-            currentTab: 'contexte',
-            tabStartTime: Date.now(),
-            tabsViewed: ['contexte'],
-            firstTabViewed: 'contexte',
-            lastTabViewed: 'contexte',
-            scrollDepth: {},
-            tabSwitchCount: 0
-        };
+<script>
+// Système de tracking simplifié
+const tracking = {
+    currentTab: 'contexte',
+    tabStartTime: Date.now(),
+    tabSequence: ['contexte'], // Séquence complète des tabs visités
+    scrollMilestones: {} // Jalons de scroll atteints par tab
+};
 
-        // Track scroll depth for each tab
-        function trackScrollDepth() {
-            const currentTab = trackingData.currentTab;
-            const tabContent = document.getElementById(currentTab);
-            
-            if (!tabContent) return;
-            
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const windowHeight = window.innerHeight;
-            const docHeight = document.documentElement.scrollHeight;
-            
-            const scrollPercentage = Math.round((scrollTop / (docHeight - windowHeight)) * 100);
-            
-            // Store the maximum scroll depth reached for this tab
-            if (!trackingData.scrollDepth[currentTab] || scrollPercentage > trackingData.scrollDepth[currentTab]) {
-                trackingData.scrollDepth[currentTab] = scrollPercentage;
-                
-                // Send scroll milestone events at 25%, 50%, 75%, 100%
-                if (scrollPercentage >= 25 && scrollPercentage < 50 && 
-                    (!trackingData.scrollDepth[currentTab + '_25'] || trackingData.scrollDepth[currentTab + '_25'] < 25)) {
-                    trackingData.scrollDepth[currentTab + '_25'] = 25;
-                    gtag('event', 'scroll_depth', {
-                        'event_category': 'Engagement',
-                        'event_label': currentTab,
-                        'scroll_percentage': 25,
-                        'tab_name': currentTab
-                    });
-                } else if (scrollPercentage >= 50 && scrollPercentage < 75 && 
-                           (!trackingData.scrollDepth[currentTab + '_50'] || trackingData.scrollDepth[currentTab + '_50'] < 50)) {
-                    trackingData.scrollDepth[currentTab + '_50'] = 50;
-                    gtag('event', 'scroll_depth', {
-                        'event_category': 'Engagement',
-                        'event_label': currentTab,
-                        'scroll_percentage': 50,
-                        'tab_name': currentTab
-                    });
-                } else if (scrollPercentage >= 75 && scrollPercentage < 100 && 
-                           (!trackingData.scrollDepth[currentTab + '_75'] || trackingData.scrollDepth[currentTab + '_75'] < 75)) {
-                    trackingData.scrollDepth[currentTab + '_75'] = 75;
-                    gtag('event', 'scroll_depth', {
-                        'event_category': 'Engagement',
-                        'event_label': currentTab,
-                        'scroll_percentage': 75,
-                        'tab_name': currentTab
-                    });
-                } else if (scrollPercentage >= 100 && 
-                           (!trackingData.scrollDepth[currentTab + '_100'] || trackingData.scrollDepth[currentTab + '_100'] < 100)) {
-                    trackingData.scrollDepth[currentTab + '_100'] = 100;
-                    gtag('event', 'scroll_depth', {
-                        'event_category': 'Engagement',
-                        'event_label': currentTab,
-                        'scroll_percentage': 100,
-                        'tab_name': currentTab
-                    });
-                }
-            }
+// Configuration GA4 - Définir tab_name pour tous les événements
+function sendEvent(eventName, additionalParams = {}) {
+    gtag('event', eventName, {
+        tab_name: tracking.currentTab, // Paramètre customisé pour tous les événements
+        ...additionalParams
+    });
+}
+
+// Tracking du scroll avec jalons (25%, 50%, 75%, 100%)
+function trackScroll() {
+    const tab = tracking.currentTab;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrollPercent = Math.round((scrollTop / (docHeight - windowHeight)) * 100);
+    
+    // Vérifier les jalons atteints
+    const milestones = [25, 50, 75, 100];
+    milestones.forEach(milestone => {
+        const key = `${tab}_${milestone}`;
+        if (scrollPercent >= milestone && !tracking.scrollMilestones[key]) {
+            tracking.scrollMilestones[key] = true;
+            sendEvent('scroll_depth', {
+                scroll_percentage: milestone
+            });
         }
+    });
+}
 
-        // Add scroll listener
-        let scrollTimeout;
-        window.addEventListener('scroll', function() {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(trackScrollDepth, 100);
-        });
+// Listener de scroll avec debounce
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(trackScroll, 100);
+});
 
-        function showTab(tabName) {
-            // Calculate time spent on previous tab
-            const timeSpent = Math.round((Date.now() - trackingData.tabStartTime) / 1000); // in seconds
-            
-            // Send time spent event for previous tab
-            gtag('event', 'tab_time_spent', {
-                'event_category': 'Engagement',
-                'event_label': trackingData.currentTab,
-                'value': timeSpent,
-                'tab_name': trackingData.currentTab,
-                'time_seconds': timeSpent
-            });
+// Fonction pour changer de tab
+function showTab(tabName) {
+    // Calculer le temps passé sur le tab précédent
+    const timeSpent = Math.round((Date.now() - tracking.tabStartTime) / 1000);
+    
+    // Envoyer le temps passé sur le tab précédent
+    sendEvent('tab_time_spent', {
+        time_seconds: timeSpent
+    });
+    
+    // Enregistrer le nouveau tab dans la séquence
+    tracking.tabSequence.push(tabName);
+    
+    // Envoyer l'événement de changement de tab
+    const previousTab = tracking.currentTab;
+    tracking.currentTab = tabName;
+    
+    sendEvent('tab_click', {
+        from_tab: previousTab
+    });
+    
+    // Réinitialiser le timer
+    tracking.tabStartTime = Date.now();
+    
+    // Interface : cacher tous les contenus
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Interface : désactiver tous les tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Interface : afficher le tab sélectionné
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+    
+    // Scroll en haut de la page
+    window.scrollTo(0, 0);
+}
 
-            // Send tab click event
-            gtag('event', 'tab_click', {
-                'event_category': 'Navigation',
-                'event_label': tabName,
-                'tab_name': tabName,
-                'from_tab': trackingData.currentTab
-            });
+// Envoyer la séquence complète à la fin de la session
+window.addEventListener('beforeunload', () => {
+    // Temps final sur le dernier tab
+    const finalTime = Math.round((Date.now() - tracking.tabStartTime) / 1000);
+    sendEvent('tab_time_spent', {
+        time_seconds: finalTime
+    });
+    
+    // Envoyer la séquence complète
+    gtag('event', 'session_complete', {
+        tab_sequence: tracking.tabSequence.join(' → '),
+        total_tabs_viewed: tracking.tabSequence.length,
+        unique_tabs: [...new Set(tracking.tabSequence)].length
+    });
+});
 
-            // Update tracking data
-            trackingData.currentTab = tabName;
-            trackingData.tabStartTime = Date.now();
-            trackingData.lastTabViewed = tabName;
-            trackingData.tabSwitchCount++;
-            
-            // Track unique tabs viewed
-            if (!trackingData.tabsViewed.includes(tabName)) {
-                trackingData.tabsViewed.push(tabName);
-                
-                // Send unique tab view count
-                gtag('event', 'unique_tabs_viewed', {
-                    'event_category': 'Navigation',
-                    'event_label': 'tab_count',
-                    'value': trackingData.tabsViewed.length,
-                    'tabs_viewed': trackingData.tabsViewed.join(',')
-                });
-            }
-
-            // Hide all tab contents
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Deactivate all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-            });
-
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-
-            // Activate selected tab
-            event.target.classList.add('active');
-            
-            // Scroll to top when switching tabs
-            window.scrollTo(0, 0);
-        }
-
-        // Track session summary when user leaves the page
-        window.addEventListener('beforeunload', function() {
-            // Calculate final time spent on current tab
-            const finalTimeSpent = Math.round((Date.now() - trackingData.tabStartTime) / 1000);
-            
-            // Send session summary
-            gtag('event', 'session_summary', {
-                'event_category': 'Session',
-                'event_label': 'summary',
-                'first_tab': trackingData.firstTabViewed,
-                'last_tab': trackingData.lastTabViewed,
-                'unique_tabs_count': trackingData.tabsViewed.length,
-                'tab_switches': trackingData.tabSwitchCount,
-                'tabs_viewed_list': trackingData.tabsViewed.join(',')
-            });
-            
-            // Send final time spent
-            gtag('event', 'tab_time_spent', {
-                'event_category': 'Engagement',
-                'event_label': trackingData.currentTab,
-                'value': finalTimeSpent,
-                'tab_name': trackingData.currentTab,
-                'time_seconds': finalTimeSpent
-            });
-        });
-
-        // Track initial page load
-        window.addEventListener('load', function() {
-            gtag('event', 'page_loaded', {
-                'event_category': 'Session',
-                'event_label': 'initial_load',
-                'first_tab': trackingData.firstTabViewed
-            });
-        });
-    </script>
+// Page chargée
+window.addEventListener('load', () => {
+    sendEvent('page_loaded');
+});
+</script>
 </body>
 </html>
