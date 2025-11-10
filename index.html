@@ -52,18 +52,18 @@
         }
         
         h1 {
-            color: #1e3a8a;
+            color: #0f4c75;
             text-align: center;
-            border-bottom: 3px solid #1e3a8a;
+            border-bottom: 3px solid #0f4c75;
             padding-bottom: 15px;
             margin-bottom: 30px;
         }
         
         h2 {
-            color: #1e40af;
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #0f4c75;
+            background: linear-gradient(135deg, #e8f4f8, #d4e9f2);
             padding: 12px 15px;
-            border-left: 4px solid #1e40af;
+            border-left: 4px solid #0f4c75;
             margin: 25px 0 15px 0;
         }
         
@@ -82,19 +82,35 @@
         }
         
         .highlight-box {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            padding: 15px;
+            background: #fff8e1;
+            border: 2px solid #f57c00;
+            padding: 20px;
             border-radius: 6px;
             margin: 20px 0;
         }
+
+        .highlight-box h4 {
+            color: #e65100;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
         
         .info-box {
-            background: #e0f2fe;
-            border: 1px solid #0ea5e9;
-            padding: 15px;
+            background: #e8f5e9;
+            border: 2px solid #43a047;
+            padding: 20px;
             border-radius: 6px;
             margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: #2e7d32;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
         }
         
         .faq-section {
@@ -124,15 +140,23 @@
         }
         
         .conseil-box {
-            background: #dcfce7;
-            border: 1px solid #22c55e;
-            padding: 15px;
+            background: #f3e5f5;
+            border: 2px solid #8e24aa;
+            padding: 20px;
             border-radius: 6px;
             margin: 20px 0;
         }
+
+        .conseil-box h4 {
+            color: #6a1b9a;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
         
         .conseil-box strong {
-            color: #166534;
+            color: #6a1b9a;
         }
         
         .contact-info {
@@ -168,8 +192,8 @@
 
         .tab.active {
             background: white;
-            color: #1e40af;
-            border-color: #1e40af;
+            color: #0f4c75;
+            border-color: #0f4c75;
             border-bottom: 2px solid white;
             margin-bottom: -2px;
         }
@@ -199,7 +223,7 @@
             }
             
             .tab.active {
-                border-bottom: 1px solid #1e40af;
+                border-bottom: 1px solid #0f4c75;
                 margin-bottom: 0;
             }
         }
@@ -209,14 +233,13 @@
     <div class="container">
         <h1>Expérimentation Contrat d'Engagement</h1>
         <div class="subtitle">Précision de l'effort de recherche d'emploi</div>
-        <div class="subtitle">Guide à destination des conseiller(e)s</div>
+        <div class="subtitle">Guide à destination des conseiller(e)s - définir un objectif de candidatures</div>
 
         <!-- Navigation par onglets -->
         <div class="tabs">
             <div class="tab active" onclick="showTab('contexte')">Contexte & Objectifs</div>
-            <div class="tab" onclick="showTab('faq1')">FAQ Générale</div>
+            <div class="tab" onclick="showTab('faq')">FAQ</div>
             <div class="tab" onclick="showTab('consignes')">Consignes</div>
-            <div class="tab" onclick="showTab('faq2')">FAQ Pratique</div>
         </div>
 
         <!-- Contenu des onglets -->
@@ -237,12 +260,13 @@
 
             <h2>Cadre et périmètre de l'expérimentation</h2>
             <div class="highlight-box">
+                <h4>⚠️ Public concerné</h4>
                 <p><strong>Vous fixerez un objectif de candidatures avec tous les demandeurs d'emploi que vous accompagnez qui ont un contrat d'engagement ouvert et un métier recherché défini.</strong></p>
             </div>
         </div>
 
-        <div id="faq1" class="tab-content">
-            <h2>FAQ Générale</h2>
+        <div id="faq" class="tab-content">
+            <h2>Foire Aux Questions</h2>
             <div class="faq-section">
                 <div class="faq-question">La fixation de cette cible de candidatures s'applique-t-elle à tous les portefeuilles d'accompagnement peu importe leur intensité (Suivi, Guidé, Renforcé, Global...) ?</div>
                 <div class="faq-answer"><strong>OUI.</strong> Tous les demandeurs d'emploi, quelle que soit leur modalité d'accompagnement, sont concernés par cette expérimentation, s'ils ont un contrat d'engagement ouvert et un métier recherché défini. L'autonomie du demandeur d'emploi peut, en revanche, être un élément déterminant dans le choix du nombre de candidatures à envoyer.</div>
@@ -278,12 +302,28 @@
                 <div class="faq-question">Une bannière "veillez à fixer un objectif de candidatures" s'affiche pour un demandeur d'emploi qui n'a pourtant pas de contrat d'engagement. Dois-je quand même fixer un objectif ?</div>
                 <div class="faq-answer"><strong>NON.</strong> La fixation systématique d'une cible de candidatures vaut seulement pour les demandeurs d'emploi qui ont un contrat d'engagement ouvert. La bannière apparaît qu'un contrat soit signé ou non. Cette implémentation uniforme a été retenue pour faciliter le développement informatique des bannières. Si vous avez fixé un objectif de candidature pour un demandeur d'emploi sans contrat d'engagement, ce n'est pas grave, cela ne sera simplement pas observé dans le cadre de cette expérimentation.</div>
             </div>
+
+            <div class="faq-section">
+                <div class="faq-question">Je ne connais pas assez bien la situation du marché du travail dans le métier recherché par le demandeur d'emploi, et je ne sais pas quelle cible fixer. Que faire ?</div>
+                <div class="faq-answer">N'hésitez pas à consulter l'outil IMT et solliciter l'avis de vos collègues conseillers entreprise. Ces derniers pourront vous donner une idée, par exemple, du nombre d'offres d'emploi publiées pour un métier donné au cours des 30 derniers jours.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">La situation du demandeur d'emploi a évolué et l'effort de recherche d'emploi défini antérieurement n'est plus pertinent. Que faire ?</div>
+                <div class="faq-answer">La cible de candidatures peut être ajustée d'un entretien à l'autre en fonction de l'évolution de la situation du DE et du marché du travail. Elle peut être renégociée avec le DE à tout moment pour rester à la fois réaliste et motivante, sans le mettre en difficulté. Si cette fréquence change, vous devez nécessairement inscrire la nouvelle cible dans le plan d'action du demandeur d'emploi comme décrit précédemment.</div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-question">Si le demandeur d'emploi ne respecte pas la fréquence de candidatures fixée, peut-il être sanctionné ?</div>
+                <div class="faq-answer"><strong>OUI.</strong> Comme toutes les autres actions inscrites dans le plan d'action, la fréquence de candidatures peut faire l'objet d'un contrôle, et potentiellement entraîner une sanction si elle n'est pas respectée. Toutefois, le fait de définir un effort de recherche attendu n'augmente pas systématiquement le risque de sanction. Pour certains DE, cela pourrait au contraire réduire ce risque, en les incitant à structurer leur recherche d'emploi et à produire autant de preuves d'un effort positif de recherche qui les protègent en cas de contrôle de la recherche d'emploi.</div>
+            </div>
         </div>
 
         <div id="consignes" class="tab-content">
             <h2>Consignes</h2>
             <div class="info-box">
-                <h3>Tous types de candidatures sont comptabilisés dans cet objectif :</h3>
+                <h4>✓ Types de candidatures comptabilisées</h4>
+                <p><strong>Tous types de candidatures sont comptabilisés dans cet objectif :</strong></p>
                 <ul>
                     <li>Mises En Contact,</li>
                     <li>Mises En Relation,</li>
@@ -305,25 +345,8 @@
             <p><strong>Exemple de critères pouvant être mobilisés :</strong> âge du demandeur, modalité de suivi et d'accompagnement, freins périphériques à l'emploi, métier visé, tension du marché du travail local, ...</p>
 
             <div class="conseil-box">
-                <p><strong>Conseil :</strong> Fixez une fréquence mensuelle pour les demandeurs d'emploi en parcours intensif (Renforcé, Global, EXH ...) et une fréquence hebdomadaire pour les demandeurs d'emploi plus autonomes (Suivi, Guidé)</p>
-            </div>
-        </div>
-
-        <div id="faq2" class="tab-content">
-            <h2>FAQ Pratique</h2>
-            <div class="faq-section">
-                <div class="faq-question">Je ne connais pas assez bien la situation du marché du travail dans le métier recherché par le demandeur d'emploi, et je ne sais pas quelle cible fixer. Que faire ?</div>
-                <div class="faq-answer">N'hésitez pas à consulter l'outil IMT et solliciter l'avis de vos collègues conseillers entreprise. Ces derniers pourront vous donner une idée, par exemple, du nombre d'offres d'emploi publiées pour un métier donné au cours des 30 derniers jours.</div>
-            </div>
-
-            <div class="faq-section">
-                <div class="faq-question">La situation du demandeur d'emploi a évolué et l'effort de recherche d'emploi défini antérieurement n'est plus pertinent. Que faire ?</div>
-                <div class="faq-answer">La cible de candidatures peut être ajustée d'un entretien à l'autre en fonction de l'évolution de la situation du DE et du marché du travail. Elle peut être renégociée avec le DE à tout moment pour rester à la fois réaliste et motivante, sans le mettre en difficulté. Si cette fréquence change, vous devez nécessairement inscrire la nouvelle cible dans le plan d'action du demandeur d'emploi comme décrit précédemment.</div>
-            </div>
-
-            <div class="faq-section">
-                <div class="faq-question">Si le demandeur d'emploi ne respecte pas la fréquence de candidatures fixée, peut-il être sanctionné ?</div>
-                <div class="faq-answer"><strong>OUI.</strong> Comme toutes les autres actions inscrites dans le plan d'action, la fréquence de candidatures peut faire l'objet d'un contrôle, et potentiellement entraîner une sanction si elle n'est pas respectée. Toutefois, le fait de définir un effort de recherche attendu n'augmente pas systématiquement le risque de sanction. Pour certains DE, cela pourrait au contraire réduire ce risque, en les incitant à structurer leur recherche d'emploi et à produire autant de preuves d'un effort positif de recherche qui les protègent en cas de contrôle de la recherche d'emploi.</div>
+                <h4>💡 Conseil pratique</h4>
+                <p><strong>Fixez une fréquence mensuelle pour les demandeurs d'emploi en parcours intensif (Renforcé, Global, EXH ...) et une fréquence hebdomadaire pour les demandeurs d'emploi plus autonomes (Suivi, Guidé)</strong></p>
             </div>
         </div>
 
