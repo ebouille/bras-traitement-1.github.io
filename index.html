@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+if<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -225,15 +225,13 @@
         }
 
         .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 20px;
+            display: none;
+            padding: 16px 20px;
+            background: white;
         }
 
         .faq-item.open .faq-answer {
-            max-height: 1000px;
-            padding: 16px 20px;
+            display: block;
         }
 
         /* Contact info */
@@ -304,9 +302,9 @@
         <!-- Navigation latérale -->
         <nav class="side-nav">
             <ul>
-                <li><a href="#pourquoi" class="nav-link active">Pourquoi un objectif ?</a></li>
+                <li><a href="#pourquoi" class="nav-link active">Objectif</a></li>
                 <li><a href="#public-concerne" class="nav-link">Public concerné</a></li>
-                <li><a href="#consignes" class="nav-link">Consignes</a></li>
+                <li><a href="#consignes" class="nav-link">En pratique</a></li>
             </ul>
         </nav>
 
@@ -322,10 +320,7 @@
                 </ul>
 
                 <div class="info-box info">
-                    <h4>ℹ️ Contexte de l'expérimentation</h4>
-                    <p>Votre agence participe à une expérimentation au cœur de l'évolution de l'accompagnement des demandeurs d'emploi.</p>
-                    <p>Dans le cadre de l'introduction du contrat d'engagement, certaines agences France Travail ont été sélectionnées pour tester différentes modalités de mise en œuvre de ce contrat et mieux comprendre l'impact du plan d'action sur les démarches de recherche d'emploi des publics accompagnés.</p>
-                    <p><strong>Objectif :</strong> Mesurer l'effet de l'inscription, dans le plan d'action, d'un niveau d'effort attendu de recherche d'emploi sur l'intensité et la nature des démarches de recherche, ainsi que sur le retour à l'emploi des publics accompagnés par France Travail.</p>
+                    <h4>ℹ️ Dans le cadre de l'introduction du contrat d'engagement, France Travail et l'Institut des Politiques Publiques travaillent conjointement à l'amélioration de ce dispositif, et cherchent à comprendre l'impact du plan d'action sur les démarches de recherche d'emploi des publics accompagnés.</h4>
                 </div>
             </section>
 
@@ -334,7 +329,7 @@
                 <h2>Public concerné</h2>
 
                 <div class="info-box warning">
-                    <p><strong>Vous fixerez un objectif de candidatures avec tous les demandeurs d'emploi que vous accompagnez qui ont un contrat d'engagement ouvert et un métier recherché défini.</strong></p>
+                    <p><strong>Tous les demandeurs d'emploi que vous accompagnez qui ont un contrat d'engagement ouvert et un métier recherché défini.</strong></p>
                 </div>
 
                 <h3>Questions fréquentes</h3>
@@ -398,11 +393,22 @@
 
             <!-- Section 3: Consignes -->
             <section id="consignes">
-                <h2>Consignes</h2>
+                <h2>En pratique</h2>
+
+                <h4>Comment inscrire l'objectif de candidatures dans le plan d'action d'un demandeur d'emploi ?</h4>
+
+                <p>Dans l'outil Organisation des Démarches et, au choix :</p>
+                <ul>
+                    <li><strong>Ajoutez une seule action "Réponse à candidature"</strong> et indiquez une fréquence (x fois, tous les y jours) dans la description de l'action → Adapté aux demandeurs d'emploi capables d'identifier des offres et de faire des candidatures en autonomie</li>
+                    <li><strong>Ajoutez une action distincte pour chaque candidature, MEC ou MER</strong> → Adapté aux candidatures et offres pour des postes ou entreprises précises, identifiées avec le demandeur d'emploi.</li>
+                </ul>
+
+                <p>Ces ajouts alimenteront directement le plan d'action du demandeur d'emploi si celui-ci a un contrat d'engagement ouvert.</p>
+
+                <h4>Types de candidatures comptabilisées</h4>
 
                 <div class="info-box success">
-                    <h4>✓ Types de candidatures comptabilisées</h4>
-                    <p><strong>Tous types de candidatures sont comptabilisés dans cet objectif :</strong></p>
+                    <h4>Types de candidatures comptabilisées</h4>
                     <ul>
                         <li>Mises En Contact,</li>
                         <li>Mises En Relation,</li>
@@ -410,14 +416,6 @@
                         <li>Offres identifiées en autonomie par le demandeur d'emploi ou propositions d'offres d'origine conseiller</li>
                     </ul>
                 </div>
-
-                <p>Pour fixer l'objectif de candidatures à envoyer dans le plan d'action d'un demandeur d'emploi, rendez-vous dans l'outil Organisation des Démarches et, au choix :</p>
-                <ul>
-                    <li><strong>Ajoutez une seule action Réponse à candidature</strong> et indiquez une fréquence (x fois, tous les y jours) dans la description de l'action → Adapté aux demandeurs d'emploi capables d'identifier des offres et de faire des candidatures en autonomie</li>
-                    <li><strong>Ajoutez une action distincte pour chaque candidature, MEC ou MER</strong> → Adapté aux candidatures et offres pour des postes ou entreprises précises, identifiées avec le demandeur d'emploi.</li>
-                </ul>
-
-                <p>Ces ajouts alimenteront directement le plan d'action du demandeur d'emploi si celui-ci a un contrat d'engagement ouvert.</p>
 
                 <p>Cette démarche s'inscrit pleinement dans votre rôle d'accompagnement personnalisé, en vous laissant en toute liberté pour adapter l'objectif de candidatures aux profils et situations des personnes que vous suivez, selon les critères que vous jugez pertinents.</p>
 
@@ -489,8 +487,8 @@
             <!-- Contact -->
             <div class="contact-info">
                 <h2>Informations de Contact</h2>
-                <p>Si vous avez d'autres questions au sujet de l'expérimentation ou des consignes transmises, vous pouvez écrire à <strong>experimentation_ced@ipp.eu</strong>.</p>
-                <p>L'équipe de recherche en charge de l'expérimentation vous répondra, et mettra à jour la liste des questions fréquentes.</p>
+                <p>Si vous avez d'autres questions, vous pouvez écrire à <strong>experimentation_ced@ipp.eu</strong>.</p>
+                <p>L'équipe de recherche de l'Institut des Politiques Publiques vous répondra, et mettra à jour la liste des questions fréquentes.</p>
             </div>
         </main>
     </div>
