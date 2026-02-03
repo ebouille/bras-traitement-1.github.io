@@ -5,19 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expérimentation Contrat d'Engagement - Guide Conseiller</title>
     
-    <!-- Google tag (gtag.js) avec détection de bots -->
-    <script>
-      function isBot() {
-        const botPattern = /(bot|crawler|spider|crawling|slurp|scraper|headless)/i;
-        return (
-          navigator.webdriver ||
-          botPattern.test(navigator.userAgent) ||
-          !navigator.languages ||
-          navigator.plugins.length === 0
-        );
+    <!-- Block search engines from indexing -->
+    <meta name="robots" content="noindex, nofollow">
+  
+  <!-- Bot-filtered Google Analytics -->
+  <script>
+    function isBot() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      
+      // Comprehensive bot patterns
+      const botPatterns = [
+        /bot/i, /crawler/i, /spider/i, /crawling/i,
+        /slurp/i, /scraper/i, /headless/i, /phantom/i,
+        /selenium/i, /puppeteer/i, /playwright/i,
+        /googlebot/i, /bingbot/i, /yandex/i,
+        /baiduspider/i, /facebookexternalhit/i,
+        /twitterbot/i, /rogerbot/i, /linkedinbot/i,
+        /embedly/i, /quora/i, /showyoubot/i,
+        /outbrain/i, /pinterest/i, /slackbot/i,
+        /vkshare/i, /w3c_validator/i, /redditbot/i,
+        /applebot/i, /whatsapp/i, /flipboard/i,
+        /tumblr/i, /bitlybot/i, /skypeuripreview/i,
+        /nuzzel/i, /discordbot/i, /google page speed/i,
+        /petalbot/i, /semrush/i, /ahrefs/i, /majestic/i,
+        /ahrefsbot/i, /dotbot/i, /mj12bot/i
+      ];
+      
+      // Check user agent
+      if (botPatterns.some(pattern => pattern.test(userAgent))) {
+        return true;
       }
       
-if (!isBot()) {
+      // Additional bot indicators
+      if (navigator.webdriver) return true;
+      if (!navigator.languages || navigator.languages.length === 0) return true;
+      if (navigator.plugins.length === 0 && !userAgent.includes('mobile')) return true;
+      
+      // Headless browser detection
+      if (window.callPhantom || window._phantom || window.__nightmare) return true;
+      
+      return false;
+    }
+
+    // Only load Google Analytics if NOT a bot
+    if (!isBot()) {
+      // Google Analytics 4 code
+      (function() {
         var script = document.createElement('script');
         script.async = true;
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-99VCJ2VKGK';
@@ -27,7 +60,12 @@ if (!isBot()) {
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-99VCJ2VKGK');
-      }
+      })();
+      
+      console.log('Real user - Analytics loaded');
+    } else {
+      console.log('Bot detected - Analytics NOT loaded');
+    }
 
     </script>
     
